@@ -1,6 +1,7 @@
 # coding=utf-8
 import menu
 import datamodel
+import configparser
 
 
 class Controller:
@@ -11,8 +12,26 @@ class Controller:
     def __init__(self):
         self.flag = 0
         self.dbm = datamodel.DataModel()
-        self.file_path = 'database.pickle'
-        self.dbm.load(self.file_path);
+        self.config = configparser.ConfigParser()
+        self.config.read('settings.configsa')
+        if not self.config.sections():
+            self.config.read_dict({'Serialization': {'serializer': 'pickle'},
+                                   'DataFiles': {'pickle': 'data.pickle',
+                                                 'yaml': 'data.yaml',
+                                                 'json': 'data.json'
+                                                 }
+                                   })
+        serializer = self.config['Serialization']['serializer']
+        self.file_path = self.config['DataFiles'][serializer]
+
+        if serializer == 'json':
+            self.serializer = datamodel.Serializer.json
+        elif serializer == 'yaml':
+            self.serializer = datamodel.Serializer.yaml
+        else:
+            self.serializer = datamodel.Serializer.pickle
+
+        self.dbm.load(self.file_path, self.serializer)
         self.default_cols = ['імʼя', 'номер', 'місто', 'email']
 
     def show_all(self):
