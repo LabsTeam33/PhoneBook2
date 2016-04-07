@@ -12,7 +12,7 @@ class YamlSerializer:
         :return: if success return loaded data, else None
         """
         try:
-            with open(file_path, 'rb') as file:
+            with open(file_path, 'r') as file:
                 return yaml.load(file)
         except IOError:
             print('Файл не знайдено. Буде створена нова база.')
@@ -25,5 +25,5 @@ class YamlSerializer:
         :param data: serializable object
         :return: None
         """
-        with open(file_path, 'wb') as file:
+        with open(file_path, 'w') as file:
             yaml.dump(data, file)
