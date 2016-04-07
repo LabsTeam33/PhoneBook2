@@ -1,5 +1,7 @@
 # coding=utf-8
 import PickleSerializer
+import YamlSerializer
+import JsonSerializer
 from enum import Enum
 __author__ = 'supremist'
 
@@ -13,9 +15,9 @@ class Serializer(Enum):
         if self == Serializer.pickle:
             return PickleSerializer.PickleSerializer
         elif self == Serializer.yaml:
-            return None
+            return YamlSerializer.YamlSerializer
         elif self == Serializer.json:
-            return None
+            return JsonSerializer.JsonSerializer
         else:
             raise ValueError
 

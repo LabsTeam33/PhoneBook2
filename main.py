@@ -13,7 +13,7 @@ class Controller:
         self.flag = 0
         self.dbm = datamodel.DataModel()
         self.config = configparser.ConfigParser()
-        self.config.read('settings.configsa')
+        self.config.read('settings.config')
         if not self.config.sections():
             self.config.read_dict({'Serialization': {'serializer': 'pickle'},
                                    'DataFiles': {'pickle': 'data.pickle',
