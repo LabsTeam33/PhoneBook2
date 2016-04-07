@@ -88,7 +88,7 @@ class Controller:
                 break
             self.flag = menu.chose_one(self.main_actions[action] + ' виконано. Бажаєте продовжити роботу?',
                                        ['Продовжити', 'Вийти'])
-        self.dbm.save(self.file_path)
+        self.dbm.save(self.file_path, self.serializer)
 
 
 Controller().main_idle()
