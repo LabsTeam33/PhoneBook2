@@ -6,7 +6,7 @@ class JsonSerializer:
 
     @staticmethod
     def load(file_path):
-       """
+        """
         Load serialized data from file_path file
         :param file_path: path to data file
         :return: if success return loaded data, else None
