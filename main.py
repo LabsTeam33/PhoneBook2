@@ -6,8 +6,9 @@ import configparser
 
 class Controller:
     """Контроллер ходу виконання програми """
-    main_actions = ['Перегляд', 'Додавання',  'Вилучення', 'Модифікація', 'Пошук за номером', 'Пошук за значенням поля',
-                    'Вихід']
+    main_actions = ['Перегляд', 'Додавання',  'Вилучення',
+                    'Модифікація', 'Пошук за номером',
+                    'Пошук за значенням поля', 'Вихід']
 
     def __init__(self):
         self.flag = 0
@@ -46,14 +47,17 @@ class Controller:
     def delete_record(self):
         """ Інтерактивне видалення запису з бази"""
         table = self.dbm.get_table()
-        index = menu.chose_entity('Виберіть номер елементу для видалення.', table, self.default_cols)
+        index = menu.chose_entity('Виберіть номер елементу для видалення.',
+                                  table, self.default_cols)
         self.dbm.delete_record(table[index]['номер'])
 
     def modify_record(self):
         """ Інтерактивни модифіказія запису"""
         table = self.dbm.get_table()
-        index = menu.chose_entity('Виберіть номер елементу для модифікації.', table, self.default_cols)
-        menu.print_table([table[index]], self.default_cols, head='Модифікується елемент')
+        index = menu.chose_entity('Виберіть номер елементу для модифікації.',
+                                  table, self.default_cols)
+        menu.print_table([table[index]], self.default_cols,
+                         head='Модифікується елемент')
         number = table[index]['номер']
         entity = self.dbm.get_record(number)
         self.dbm.delete_record(number)
@@ -82,13 +86,15 @@ class Controller:
             elif action == 4:
                 self.search('номер')
             elif action == 5:
-                field = self.default_cols[menu.chose_one('Виберіть поле для пошуку', self.default_cols)]
+                field = self.default_cols[menu.chose_one(
+                        'Виберіть поле для пошуку', self.default_cols)]
                 self.search(field)
             else:
                 break
-            self.flag = menu.chose_one(self.main_actions[action] + ' виконано. Бажаєте продовжити роботу?',
+            self.flag = menu.chose_one(self.main_actions[action] +
+                                       ' виконано. Бажаєте продовжити роботу?',
                                        ['Продовжити', 'Вийти'])
         self.dbm.save(self.file_path, self.serializer)
 
-
-Controller().main_idle()
+if __name__ == '__main__':
+    Controller().main_idle()

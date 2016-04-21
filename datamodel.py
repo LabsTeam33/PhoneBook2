@@ -52,14 +52,16 @@ class DataModel:
 
     def get_record(self, number):
         """ Отримання запису у вигляді словника з полями record_keys.
-        Не превіряє наявність запису, якщо немає впевненості в наявності використовувати метод search_by_field
+        Не превіряє наявність запису, якщо немає впевненості в наявності
+        використовувати метод search_by_field
         :param number: номер телефона запису для отримання"""
         record = {'номер': number}
         record.update(self.records[number])
         return record
 
     def get_table(self):
-        """ Отримання повного списку записів, кожен з яких у форматі словнику з полями record_keys"""
+        """ Отримання повного списку записів, кожен з яких у форматі словнику
+         з полями record_keys"""
         table = []
         for number in sorted(self.records.keys()):
             table.append(self.get_record(number))
